@@ -1,16 +1,16 @@
-package com.nonglam.baobaoshopadmin.ui.slideshow;
+package com.nonglam.baobaoshopadmin.ui.products;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class SlideshowViewModel extends ViewModel {
+public class ProductsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public SlideshowViewModel() {
+    public ProductsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is slideshow fragment");
+        mText.setValue("This is products fragment");
     }
 
     public LiveData<String> getText() {

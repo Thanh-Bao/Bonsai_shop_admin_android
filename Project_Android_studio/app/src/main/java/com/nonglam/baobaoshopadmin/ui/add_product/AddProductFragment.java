@@ -1,4 +1,4 @@
-package com.nonglam.baobaoshopadmin.ui.home;
+package com.nonglam.baobaoshopadmin.ui.add_product;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,24 +12,23 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.nonglam.baobaoshopadmin.R;
-import com.nonglam.baobaoshopadmin.databinding.FragmentHomeBinding;
+import com.nonglam.baobaoshopadmin.databinding.FragmentAddproductBinding;
 
-public class HomeFragment extends Fragment {
+public class AddProductFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
-    private FragmentHomeBinding binding;
+    private AddProductViewModel addProductViewModel;
+    private FragmentAddproductBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        addProductViewModel =
+                new ViewModelProvider(this).get(AddProductViewModel.class);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentAddproductBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        final TextView textView = binding.textSlideshow;
+        addProductViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

@@ -1,4 +1,4 @@
-package com.nonglam.baobaoshopadmin.ui.slideshow;
+package com.nonglam.baobaoshopadmin.ui.Orders;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,24 +12,23 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.nonglam.baobaoshopadmin.R;
-import com.nonglam.baobaoshopadmin.databinding.FragmentSlideshowBinding;
+import com.nonglam.baobaoshopadmin.databinding.FragmentOrdersBinding;
 
-public class SlideshowFragment extends Fragment {
+public class OrdersFragment extends Fragment {
 
-    private SlideshowViewModel slideshowViewModel;
-    private FragmentSlideshowBinding binding;
+    private OrdersViewModel ordersViewModel;
+    private FragmentOrdersBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+        ordersViewModel =
+                new ViewModelProvider(this).get(OrdersViewModel.class);
 
-        binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+        binding = FragmentOrdersBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textSlideshow;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        final TextView textView = binding.textHome;
+        ordersViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
