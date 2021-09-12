@@ -25,28 +25,7 @@ public class LoginDataSource {
 
 
 
-        APIServices.apiServices.login(new User("admin","Admin123@#"))
-        .enqueue(new
-                         Callback<User>() {
-                             @Override
-                             public void onResponse(Call<User> call, Response<User> response) {
-                                 User user = response.body();
 
-                                  fakeUser =
-                                         new LoggedInUser(
-                                                 java.util.UUID.randomUUID().toString(),
-                                                 user.getToken());
-                                MainActivity.sqLite.queryData("INSERT INTO TOKEN VALUES(\""+user.getToken()+"\")");
-
-
-                             }
-
-                             @Override
-                             public void onFailure(Call<User> call, Throwable t) {
-                                 Log.d("MYTAG123", "LOIIIII");
-                             }
-                         }
-        );
 
             if(fakeUser!=null){
                 return new Result.Success<>(fakeUser);

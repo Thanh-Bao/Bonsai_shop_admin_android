@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         if(!token.moveToNext()){
             Intent switchActivityIntent = new Intent(this,  LoginActivity.class);
             startActivity(switchActivityIntent);
+            finish();
         }
 
         setSupportActionBar(binding.appBarMain.toolbar);
