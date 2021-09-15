@@ -16,6 +16,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.nonglam.baobaoshopadmin.databinding.ActivityMainBinding;
+import com.nonglam.baobaoshopadmin.static_data.DataSource;
 import com.nonglam.baobaoshopadmin.static_data.SQLite;
 import com.nonglam.baobaoshopadmin.ui.LoginActivity;
 
@@ -44,16 +45,13 @@ public class MainActivity extends AppCompatActivity {
             Intent switchActivityIntent = new Intent(this,  LoginActivity.class);
             startActivity(switchActivityIntent);
             finish();
+        } else {
+            int index = token.getColumnIndexOrThrow("TOKEN");
+            DataSource.token = token.getString(index);
         }
 
         setSupportActionBar(binding.appBarMain.toolbar);
-        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each

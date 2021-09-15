@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class ProductsFragment extends Fragment {
     private ProductsViewModel productsViewModel;
     private FragmentProductsBinding binding;
     private ListView listView;
+    private Button btnLoadMore;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,6 +43,16 @@ public class ProductsFragment extends Fragment {
         View root = binding.getRoot();
 
         listView = (ListView) binding.LVProducts;
+btnLoadMore = (Button) binding.LsProductLoadMore;
+
+        btnLoadMore.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Toast.makeText(getContext()," hihihih " , Toast.LENGTH_LONG).show();
+            }
+        });
+
+
         ArrayList<Product> listProduct = new ArrayList<>();
 
         // TODO Auto-generated method stub
@@ -51,7 +63,6 @@ public class ProductsFragment extends Fragment {
 
                 for ( Product product_item: response.body().getList()) {
                     listProduct.add(product_item);
-                    Log.d("K124",listProduct.size() + " ______77777777777777");
                 }
 
                 ProductAdapter arrayAdapter = new ProductAdapter(getActivity(),listProduct);
@@ -77,4 +88,6 @@ public class ProductsFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+
 }
