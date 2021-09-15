@@ -8,15 +8,16 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.nonglam.baobaoshopadmin.R;
+import com.nonglam.baobaoshopadmin.model.Product;
 
 import java.util.ArrayList;
 
 public class ProductAdapter extends BaseAdapter {
 
-    private ArrayList<String> items;
+    private ArrayList<Product> items;
     private Activity activity;
 
-    public ProductAdapter(Activity activity, ArrayList<String> items){
+    public ProductAdapter(Activity activity, ArrayList<Product> items){
     this.activity = activity;
     this.items = items;
     }
@@ -42,7 +43,7 @@ public class ProductAdapter extends BaseAdapter {
         view = inflater.inflate(R.layout.item_product, null);
 
         TextView tv = (TextView) view.findViewById(R.id.tv_name);
-        tv.setText(items.get(i));
+        tv.setText(items.get(i).getName());
         return view;
     }
 }

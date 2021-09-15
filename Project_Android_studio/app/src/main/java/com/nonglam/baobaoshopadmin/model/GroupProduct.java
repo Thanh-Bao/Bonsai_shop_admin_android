@@ -39,7 +39,7 @@ public class GroupProduct {
 
     public String getListToString(){
         StringBuilder str = new StringBuilder();
-        for (Product p: list) {
+        for (Product p: getList()) {
             str.append(p);
             str.append("/n");
         }

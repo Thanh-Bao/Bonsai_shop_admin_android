@@ -17,6 +17,7 @@ import com.nonglam.baobaoshopadmin.API.APIServices;
 import com.nonglam.baobaoshopadmin.Adapter.ProductAdapter;
 import com.nonglam.baobaoshopadmin.databinding.FragmentProductsBinding;
 import com.nonglam.baobaoshopadmin.model.GroupProduct;
+import com.nonglam.baobaoshopadmin.model.Product;
 import com.nonglam.baobaoshopadmin.static_data.DataSource;
 
 import java.util.ArrayList;
@@ -39,13 +40,26 @@ public class ProductsFragment extends Fragment {
         binding = FragmentProductsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        listView = (ListView) binding.LVProducts;
+        ArrayList<Product> listProduct = new ArrayList<>();
 
         // TODO Auto-generated method stub
         APIServices.apiServices.getProducts("Bearer "+ DataSource.token)
         .enqueue(new Callback<GroupProduct>() {
             @Override
             public void onResponse(Call<GroupProduct> call, Response<GroupProduct> response) {
-                Log.d("XYZ",response.body().getListToString());
+
+                for ( Product product_item: response.body().getList()) {
+                    listProduct.add(product_item);
+                    Log.d("K124",listProduct.size() + " ______77777777777777");
+                }
+
+                ProductAdapter arrayAdapter = new ProductAdapter(getActivity(),listProduct);
+                listView.setAdapter(arrayAdapter);
+                listView.setOnItemClickListener((adapterView, view, i, l) ->
+                        Toast.makeText(getContext()," hihihih " + i + " "+ listProduct.get(i).toString(), Toast.LENGTH_LONG).show()
+                );
+
             }
 
             @Override
@@ -54,71 +68,6 @@ public class ProductsFragment extends Fragment {
             }
         });
         ;
-
-
-        listView = (ListView) binding.LVProducts;
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("android");
-        arrayList.add("Kotllin");
-        arrayList.add("great");
-        arrayList.add("is");
-        arrayList.add("android");
-        arrayList.add("Kotllin");
-        arrayList.add("great");
-        arrayList.add("is");
-        arrayList.add("android");
-        arrayList.add("Kotllin");
-        arrayList.add("great");
-        arrayList.add("is");
-        arrayList.add("android");
-        arrayList.add("Kotllin");
-        arrayList.add("great");
-        arrayList.add("is");
-        arrayList.add("android");
-        arrayList.add("Kotllin");
-        arrayList.add("great");
-        arrayList.add("is");
-        arrayList.add("android");
-        arrayList.add("Kotllin");
-        arrayList.add("great");
-        arrayList.add("is");
-        arrayList.add("android");
-        arrayList.add("Kotllin");
-        arrayList.add("great");
-        arrayList.add("is");
-        arrayList.add("android");
-        arrayList.add("Kotllin");
-        arrayList.add("great");
-        arrayList.add("is");
-        arrayList.add("android");
-        arrayList.add("Kotllin");
-        arrayList.add("great");
-        arrayList.add("is");
-        arrayList.add("android");
-        arrayList.add("Kotllin");
-        arrayList.add("great");
-        arrayList.add("is");
-        arrayList.add("android");
-        arrayList.add("Kotllin");
-        arrayList.add("great");
-        arrayList.add("is");
-        arrayList.add("android");
-        arrayList.add("Kotllin");
-        arrayList.add("great");
-        arrayList.add("is");
-        arrayList.add("android");
-        arrayList.add("Kotllin");
-        arrayList.add("great");
-        arrayList.add("is");
-
-        ProductAdapter arrayAdapter = new ProductAdapter(getActivity(),arrayList);
-
-        listView.setAdapter(arrayAdapter);
-        listView.setOnItemClickListener((adapterView, view, i, l) ->
-
-                Toast.makeText(getContext()," hihihih " + i + " "+ arrayList.get(i).toString(), Toast.LENGTH_LONG).show()
-
-        );
 
         return root;
     }
