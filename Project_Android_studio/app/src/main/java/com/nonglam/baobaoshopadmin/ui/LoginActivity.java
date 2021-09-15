@@ -1,4 +1,4 @@
-package com.nonglam.baobaoshopadmin.ui.login;
+package com.nonglam.baobaoshopadmin.ui;
 
 import android.app.Activity;
 
@@ -25,9 +25,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.nonglam.baobaoshopadmin.API.APIServices;
 import com.nonglam.baobaoshopadmin.MainActivity;
 import com.nonglam.baobaoshopadmin.R;
-import com.nonglam.baobaoshopadmin.data.model.LoggedInUser;
 import com.nonglam.baobaoshopadmin.databinding.ActivityLoginBinding;
 import com.nonglam.baobaoshopadmin.model.User;
+import com.nonglam.baobaoshopadmin.static_data.DataSource;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,8 +35,9 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private LoginViewModel loginViewModel;
+
     private ActivityLoginBinding binding;
+
 
 
     @Override
@@ -46,8 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
-                .get(LoginViewModel.class);
+
 
         final EditText usernameEditText = binding.username;
         final EditText passwordEditText = binding.password;
@@ -69,8 +69,11 @@ public class LoginActivity extends AppCompatActivity {
                                              public void onResponse(Call<User> call, Response<User> response) {
                                                  try{
                                                      User user = response.body();
-                                                     MainActivity.sqLite.queryData("INSERT INTO TOKEN VALUES(\""+user.getToken()+"\")");
+                                                     DataSource.token= user.getToken();
+                                                     MainActivity.sqLite.queryData("INSERT INTO TOKEN VALUES(\""+DataSource.token+"\")");
                                                      switchScreen();
+
+
 
                                                      Toast.makeText(getApplicationContext(), "Đăng nhập thành công",
                                                              Toast.LENGTH_LONG).show();

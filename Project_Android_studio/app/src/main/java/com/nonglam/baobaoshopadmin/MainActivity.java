@@ -16,7 +16,8 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.nonglam.baobaoshopadmin.databinding.ActivityMainBinding;
-import com.nonglam.baobaoshopadmin.ui.login.LoginActivity;
+import com.nonglam.baobaoshopadmin.static_data.SQLite;
+import com.nonglam.baobaoshopadmin.ui.LoginActivity;
 
 
 

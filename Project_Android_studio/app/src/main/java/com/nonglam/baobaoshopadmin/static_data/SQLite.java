@@ -1,4 +1,4 @@
-package com.nonglam.baobaoshopadmin;
+package com.nonglam.baobaoshopadmin.static_data;
 
 import android.content.Context;
 import android.database.Cursor;
