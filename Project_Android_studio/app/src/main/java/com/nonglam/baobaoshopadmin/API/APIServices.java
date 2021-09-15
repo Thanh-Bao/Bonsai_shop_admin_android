@@ -14,6 +14,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 
 public interface APIServices {
@@ -33,8 +35,8 @@ public interface APIServices {
     Call<User> login(@Body User user);
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @GET("Products/Admin?page=1")
-    Call<GroupProduct> getProducts(@Header("Authorization") String token);
+    @GET("Products/Admin")
+    Call<GroupProduct> getProducts(@Query("page") int page , @Header("Authorization") String token);
 
 
 }

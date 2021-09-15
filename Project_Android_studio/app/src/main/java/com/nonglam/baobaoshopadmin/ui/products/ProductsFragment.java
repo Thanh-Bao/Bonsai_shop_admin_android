@@ -1,5 +1,7 @@
 package com.nonglam.baobaoshopadmin.ui.products;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,34 +31,54 @@ import retrofit2.Response;
 
 public class ProductsFragment extends Fragment {
 
-    private ProductsViewModel productsViewModel;
+
     private FragmentProductsBinding binding;
     private ListView listView;
     private Button btnLoadMore;
+    private ArrayList<Product> listProduct = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        productsViewModel =
-                new ViewModelProvider(this).get(ProductsViewModel.class);
+
 
         binding = FragmentProductsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         listView = (ListView) binding.LVProducts;
-btnLoadMore = (Button) binding.LsProductLoadMore;
+        btnLoadMore = (Button) binding.LsProductLoadMore;
+
 
         btnLoadMore.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Toast.makeText(getContext()," hihihih " , Toast.LENGTH_LONG).show();
+                DataSource.nextPage++;
+
+                APIServices.apiServices.getProducts(DataSource.nextPage,"Bearer "+ DataSource.token)
+                        .enqueue(new Callback<GroupProduct>() {
+                            @Override
+                            public void onResponse(Call<GroupProduct> call, Response<GroupProduct> response) {
+
+                                for ( Product product_item: response.body().getList()) {
+                                    listProduct.add(product_item);
+                                }
+
+                                ProductAdapter arrayAdapter = new ProductAdapter(getActivity(),listProduct);
+                                listView.setAdapter(arrayAdapter);
+                                listView.setOnItemClickListener((adapterView, view, i, l) ->
+                                        onClickItem(i)
+                                );
+
+                            }
+                            @Override
+                            public void onFailure(Call<GroupProduct> call, Throwable t) {
+                                showAlert();
+                            }
+                        });
+
             }
         });
-
-
-        ArrayList<Product> listProduct = new ArrayList<>();
-
         // TODO Auto-generated method stub
-        APIServices.apiServices.getProducts("Bearer "+ DataSource.token)
+        APIServices.apiServices.getProducts(1,"Bearer "+ DataSource.token)
         .enqueue(new Callback<GroupProduct>() {
             @Override
             public void onResponse(Call<GroupProduct> call, Response<GroupProduct> response) {
@@ -68,18 +90,16 @@ btnLoadMore = (Button) binding.LsProductLoadMore;
                 ProductAdapter arrayAdapter = new ProductAdapter(getActivity(),listProduct);
                 listView.setAdapter(arrayAdapter);
                 listView.setOnItemClickListener((adapterView, view, i, l) ->
-                        Toast.makeText(getContext()," hihihih " + i + " "+ listProduct.get(i).toString(), Toast.LENGTH_LONG).show()
+                        onClickItem(i)
                 );
 
             }
-
             @Override
             public void onFailure(Call<GroupProduct> call, Throwable t) {
-                Log.d("abc", "0943" + t.toString());
+                showAlert();
             }
         });
         ;
-
         return root;
     }
 
@@ -87,6 +107,21 @@ btnLoadMore = (Button) binding.LsProductLoadMore;
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    public void showAlert(){
+        new AlertDialog.Builder(getContext())
+                .setTitle("Lỗi")
+                .setMessage("Lỗi tải dữ liệu")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                }).show();
+    }
+
+    private void onClickItem(int i){
+        Toast.makeText(getContext()," hihihih123 " + i + " "+ listProduct.get(i).toString(), Toast.LENGTH_LONG).show();
     }
 
 

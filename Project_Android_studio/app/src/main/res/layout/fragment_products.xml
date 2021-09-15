@@ -17,7 +17,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-       android:width="10dp"
+        android:width="10dp"
         android:height="10dp"
         android:layout_marginHorizontal="100dp"
         android:text="Tải thêm"
