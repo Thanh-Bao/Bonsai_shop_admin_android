@@ -2,6 +2,7 @@ package com.nonglam.baobaoshopadmin.ui.products;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.nonglam.baobaoshopadmin.API.APIServices;
 import com.nonglam.baobaoshopadmin.Adapter.ProductAdapter;
+import com.nonglam.baobaoshopadmin.ProductEditer;
 import com.nonglam.baobaoshopadmin.databinding.FragmentProductsBinding;
 import com.nonglam.baobaoshopadmin.model.GroupProduct;
 import com.nonglam.baobaoshopadmin.model.Product;
@@ -121,7 +123,10 @@ public class ProductsFragment extends Fragment {
     }
 
     private void onClickItem(int i){
-        Toast.makeText(getContext()," hihihih123 " + i + " "+ listProduct.get(i).toString(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(getContext()," hihihih123 " + i + " "+ listProduct.get(i).toString(), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(getContext(), ProductEditer.class);
+        intent.putExtra("EXTRA_SESSION_ID", listProduct.get(i).toString());
+        startActivity(intent);
     }
 
 

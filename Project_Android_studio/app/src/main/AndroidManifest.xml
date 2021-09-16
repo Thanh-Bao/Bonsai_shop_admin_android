@@ -12,11 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BảoBảoShopAdmin">
         <activity
+            android:name=".ProductEditer"
+            android:exported="true"
+            android:label="@string/title_activity_product_editer"
+            android:theme="@style/Theme.BảoBảoShopAdmin.NoActionBar" />
+        <activity
             android:name=".ui.LoginActivity"
             android:exported="true"
             android:label="@string/title_activity_login"
-            android:noHistory="true"
-            />
+            android:noHistory="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
